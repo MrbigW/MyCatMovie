@@ -1,4 +1,4 @@
-package com.atsgg.mycatmovie.fragment;
+package com.atsgg.mycatmovie.common;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

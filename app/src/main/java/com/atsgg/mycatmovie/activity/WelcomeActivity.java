@@ -10,7 +10,6 @@ import com.atsgg.mycatmovie.bean.WelBean;
 import com.atsgg.mycatmovie.common.BaseActivity;
 import com.atsgg.mycatmovie.utils.Constants;
 import com.atsgg.mycatmovie.utils.DownLoaderUtils;
-import com.atsgg.mycatmovie.utils.ToastUtil;
 import com.atsgg.mycatmovie.utils.UIUtils;
 import com.bumptech.glide.Glide;
 
@@ -31,6 +30,7 @@ public class WelcomeActivity extends BaseActivity {
         getDataFromNet();
     }
 
+
     private void getDataFromNet() {
         new DownLoaderUtils().getJsonResult(Constants.URL_WEL)
                 .subscribeOn(Schedulers.io())
@@ -49,19 +49,23 @@ public class WelcomeActivity extends BaseActivity {
 
                     @Override
                     public void onError(Throwable e) {
-                        ToastUtil.showToast(WelcomeActivity.this, e.getMessage());
+                        startActivity(new Intent(WelcomeActivity.this, MainActivity.class));
                     }
 
                     @Override
                     public void onNext(String s) {
                         if (!TextUtils.isEmpty(s)) {
                             processData(s);
-                            Glide.with(WelcomeActivity.this)
-                                    .load(mWelBean.getPosters().get(0).getPic())
-                                    .placeholder(R.drawable.welcome)
-                                    .fitCenter()
-                                    .into(ivWel);
-
+                            UIUtils.getHandler().postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Glide.with(WelcomeActivity.this)
+                                            .load(mWelBean.getPosters().get(0).getPic())
+                                            .placeholder(R.drawable.welcome)
+                                            .fitCenter()
+                                            .into(ivWel);
+                                }
+                            }, 1000);
                         }
                     }
                 });

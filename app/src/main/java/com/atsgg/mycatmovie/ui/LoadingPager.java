@@ -5,7 +5,10 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.RotateAnimation;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.atsgg.mycatmovie.R;
@@ -65,6 +68,14 @@ public abstract class LoadingPager extends FrameLayout {
 
         if (view_loading == null) {
             view_loading = UIUtils.getView(R.layout.page_loading);
+
+            ImageView loding_rotate = (ImageView) view_loading.findViewById(R.id.loding_rotate);
+            RotateAnimation animation = new RotateAnimation(0, 360, Animation.RELATIVE_TO_SELF, 0.5F, Animation.RELATIVE_TO_SELF, 0.5F);
+            animation.setDuration(1500);
+            animation.setRepeatCount(999999);
+            loding_rotate.setAnimation(animation);
+            animation.start();
+
             addView(view_loading, params);
         }
         if (view_error == null) {
