@@ -8,7 +8,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-            android:background="@color/top_bg">
+        android:background="@color/top_bg">
 
 
         <LinearLayout
@@ -25,9 +25,10 @@
                 android:gravity="center"
                 android:text="北京"
                 android:textColor="@android:color/white"
-                android:textSize="20sp"/>
+                android:textSize="16sp"/>
 
             <ImageView
+                android:layout_gravity="center_vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="3dp"
@@ -36,7 +37,20 @@
         </LinearLayout>
 
 
+        <com.atsgg.mycatmovie.ui.ViewpagerIndicator
+            android:layout_marginLeft="5dp"
+            android:layout_gravity="center_vertical"
+            android:id="@+id/vpi_movie"
+            android:layout_width="250dp"
+            android:layout_height="36dp"/>
+
+
     </LinearLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_movie"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 
 </LinearLayout>

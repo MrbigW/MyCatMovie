@@ -22,6 +22,10 @@ public class WelcomeActivity extends BaseActivity {
 
     @BindView(R.id.iv_wel)
     ImageView ivWel;
+    @BindView(R.id.iv_ru)
+    ImageView ivRu;
+    @BindView(R.id.iv_rw)
+    ImageView ivRw;
 
     private WelBean mWelBean;
 
@@ -61,7 +65,7 @@ public class WelcomeActivity extends BaseActivity {
                                 public void run() {
                                     Glide.with(WelcomeActivity.this)
                                             .load(mWelBean.getPosters().get(0).getPic())
-                                            .placeholder(R.drawable.welcome)
+                                            .placeholder(R.drawable.ru)
                                             .fitCenter()
                                             .into(ivWel);
                                 }

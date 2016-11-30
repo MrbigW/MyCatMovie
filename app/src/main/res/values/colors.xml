@@ -3,9 +3,16 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="white">#ffffff</color>
 
     <color name="home_back_unselected">#6A6A6A</color>
     <color name="home_back_selected">#ff0000</color>
+
+
+    <color name="presale">#ff33b5e5</color>
+
+
+    <color name="tv_bg">#3b3838</color>
 
     <color name="top_bg">#D43E37</color>
 
