@@ -9,8 +9,7 @@ import android.widget.TextView;
 import com.atsgg.mycatmovie.R;
 import com.atsgg.mycatmovie.adapter.common.CommonAdapter;
 import com.atsgg.mycatmovie.adapter.common.ViewHolder;
-import com.atsgg.mycatmovie.bean.MovieNextBean;
-import com.atsgg.mycatmovie.utils.Constants;
+import com.atsgg.mycatmovie.bean.PrevueBean;
 import com.bumptech.glide.Glide;
 
 import java.util.List;
@@ -22,17 +21,15 @@ import java.util.List;
  * Usage: -.-
  * -------------------=.=------------------------
  */
-public class PrevueAdapter extends CommonAdapter<MovieNextBean.DataBean.ComingBean> {
+public class PrevueAdapter extends CommonAdapter<PrevueBean.DataBean> {
 
     private Context mContext;
     private int mLayoutId;
-    private List<MovieNextBean.DataBean.ComingBean> mComingBeen;
 
-    public PrevueAdapter(Context context, int layoutId, List<MovieNextBean.DataBean.ComingBean> datas) {
+    public PrevueAdapter(Context context, int layoutId, List<PrevueBean.DataBean> datas) {
         super(context, layoutId, datas);
         this.mContext = context;
         this.mLayoutId = layoutId;
-        this.mComingBeen = datas;
     }
 
     @Override
@@ -41,14 +38,14 @@ public class PrevueAdapter extends CommonAdapter<MovieNextBean.DataBean.ComingBe
     }
 
     @Override
-    public void convert(ViewHolder holder, MovieNextBean.DataBean.ComingBean comingBean) {
+    public void convert(ViewHolder holder, PrevueBean.DataBean dataBean) {
         PrevueViewHolder viewHolder = (PrevueViewHolder) holder;
 
-        String imgUrl = comingBean.getImg().replaceAll(Constants.ERROR_URL, Constants.RIGHT_URL).replaceAll(Constants.ERROR_URL_2, Constants.RIGHT_URL);
+        String imgUrl = dataBean.getImg();
         Glide.with(mContext).load(imgUrl).into(viewHolder.prevue_icon);
 
-        viewHolder.tv_name.setText(comingBean.getNm());
-        viewHolder.tv_dsc.setText(comingBean.getVideoName());
+        viewHolder.tv_name.setText(dataBean.getMovieName());
+        viewHolder.tv_dsc.setText(dataBean.getOriginName());
     }
 
     class PrevueViewHolder extends ViewHolder {

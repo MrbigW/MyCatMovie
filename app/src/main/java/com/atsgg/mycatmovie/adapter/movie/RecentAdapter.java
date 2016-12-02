@@ -9,7 +9,7 @@ import android.widget.TextView;
 import com.atsgg.mycatmovie.R;
 import com.atsgg.mycatmovie.adapter.common.CommonAdapter;
 import com.atsgg.mycatmovie.adapter.common.ViewHolder;
-import com.atsgg.mycatmovie.bean.MovieNextBean;
+import com.atsgg.mycatmovie.bean.RecentBean;
 import com.atsgg.mycatmovie.utils.Constants;
 import com.bumptech.glide.Glide;
 
@@ -22,17 +22,15 @@ import java.util.List;
  * Usage: -.-
  * -------------------=.=------------------------
  */
-public class RecentAdapter extends CommonAdapter<MovieNextBean.DataBean.ComingBean> {
+public class RecentAdapter extends CommonAdapter<RecentBean.DataBean.MoviesBean> {
 
     private Context mContext;
     private int mLayoutId;
-    private List<MovieNextBean.DataBean.ComingBean> mComingBeen;
 
-    public RecentAdapter(Context context, int layoutId, List<MovieNextBean.DataBean.ComingBean> datas) {
+    public RecentAdapter(Context context, int layoutId, List<RecentBean.DataBean.MoviesBean> datas) {
         super(context, layoutId, datas);
         this.mContext = context;
         this.mLayoutId = layoutId;
-        this.mComingBeen = datas;
     }
 
     @Override
@@ -41,15 +39,20 @@ public class RecentAdapter extends CommonAdapter<MovieNextBean.DataBean.ComingBe
     }
 
     @Override
-    public void convert(ViewHolder holder, MovieNextBean.DataBean.ComingBean comingBean) {
+    public void convert(ViewHolder holder, RecentBean.DataBean.MoviesBean moviesBean) {
         RencentHolder rencentHolder = (RencentHolder) holder;
 
-        String imgUrl = comingBean.getImg().replaceAll(Constants.ERROR_URL, Constants.RIGHT_URL).replaceAll(Constants.ERROR_URL_2, Constants.RIGHT_URL);
+        String imgUrl = moviesBean.getImg().replaceAll(Constants.ERROR_URL, Constants.RIGHT_URL).replaceAll(Constants.ERROR_URL_2, Constants.RIGHT_URL);
         Glide.with(mContext).load(imgUrl).into(rencentHolder.iv_recent_icon);
 
-        rencentHolder.tv_date.setText(comingBean.getRt());
-        rencentHolder.tv_rencent_name.setText(comingBean.getNm());
-        rencentHolder.tv_rencent_wish.setText(comingBean.getWish()+"人想看");
+        rencentHolder.tv_date.setText(moviesBean.getRt());
+//        else if (result[0].endsWith("17")) {
+//            rencentHolder.tv_date.setText("17年" + result[1] + "月" + result[2] + "日");
+//        }
+
+
+        rencentHolder.tv_rencent_name.setText(moviesBean.getNm());
+        rencentHolder.tv_rencent_wish.setText(moviesBean.getWish() + "人想看");
     }
 
     class RencentHolder extends ViewHolder {

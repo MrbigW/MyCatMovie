@@ -13,8 +13,11 @@ import com.atsgg.mycatmovie.adapter.movie.PrevueAdapter;
 import com.atsgg.mycatmovie.adapter.movie.RecentAdapter;
 import com.atsgg.mycatmovie.bean.MovieNextBean;
 import com.atsgg.mycatmovie.bean.NextMovieHeaderBean;
+import com.atsgg.mycatmovie.bean.PrevueBean;
+import com.atsgg.mycatmovie.bean.RecentBean;
 import com.atsgg.mycatmovie.common.BaseFragment;
 import com.atsgg.mycatmovie.utils.Constants;
+import com.atsgg.mycatmovie.utils.DownLoaderUtils;
 import com.atsgg.mycatmovie.utils.UIUtils;
 import com.atsgg.mycatmovie.utils.decoration.DividerItemDecoration;
 import com.mcxtzhang.indexlib.suspension.SuspensionDecoration;
@@ -23,6 +26,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by MrbigW on 2016/11/30.
@@ -39,7 +45,12 @@ public class NextMovie extends BaseFragment {
     RecyclerView rvMovieNext;
     private List<MovieNextBean.DataBean.ComingBean> mComing;
 
+    private List<PrevueBean.DataBean> mPrevueBeen;
+
+    private List<RecentBean.DataBean.MoviesBean> mRecentBeen;
+
     private LinearLayoutManager mManager;
+
     private SuspensionDecoration mDecoration;
 
     private ArrayList<NextMovieHeaderBean> mSourceDatas;
@@ -56,9 +67,61 @@ public class NextMovie extends BaseFragment {
 
     @Override
     protected void initData(String content) {
-        processData(content);
-        initViews();
-        setDatas();
+        processComing(content);
+
+        new DownLoaderUtils().getJsonResult(Constants.URL_MOVIE_PREVUE)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<String>() {
+                    @Override
+                    public void onCompleted() {
+                        getRecentBean();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(String s) {
+                        processPrevue(s);
+
+                    }
+                });
+
+    }
+
+    private void getRecentBean() {
+        new DownLoaderUtils().getJsonResult(Constants.URL_MOVIE_RECNET)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<String>() {
+                    @Override
+                    public void onCompleted() {
+                        initViews();
+                        setDatas();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(String s) {
+                        processRecent(s);
+                    }
+                });
+    }
+
+
+    private void processRecent(String s) {
+        mRecentBeen = JSON.parseObject(s, RecentBean.class).getData().getMovies();
+    }
+
+    private void processPrevue(String s) {
+        mPrevueBeen = JSON.parseObject(s, PrevueBean.class).getData();
     }
 
 
@@ -81,13 +144,13 @@ public class NextMovie extends BaseFragment {
                     case R.layout.prevue_item_header_item:
                         //横向recyclerview
                         RecyclerView recyclerView = holder.getView(R.id.rv_prevue);
-                        recyclerView.setAdapter(new PrevueAdapter(getActivity(), R.layout.prevue_item, mComing));
+                        recyclerView.setAdapter(new PrevueAdapter(getActivity(), R.layout.prevue_item, mPrevueBeen));
                         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
                         break;
                     case R.layout.recent_item_header_item:
                         //横向recyclerview
                         RecyclerView recyclerView1 = holder.getView(R.id.rv_recent);
-                        recyclerView1.setAdapter(new RecentAdapter(getActivity(), R.layout.recent_item, mComing));
+                        recyclerView1.setAdapter(new RecentAdapter(getActivity(), R.layout.recent_item, mRecentBeen));
                         recyclerView1.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
                         break;
                     case R.layout.header_search_layout:
@@ -136,7 +199,7 @@ public class NextMovie extends BaseFragment {
     }
 
 
-    private void processData(String content) {
+    private void processComing(String content) {
         mComing = JSON.parseObject(content, MovieNextBean.class).getData().getComing();
     }
 

@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="160dp"
                 android:layout_height="110dp"
-                android:padding="10dp">
+                android:padding="5dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -11,11 +11,12 @@
         <ImageView
             android:scaleType="fitXY"
             android:id="@+id/prevue_icon"
-            android:layout_width="150dp"
+            android:layout_width="200dp"
             android:layout_height="100dp"
             android:src="@drawable/ri"/>
 
         <ImageView
+            android:layout_marginRight="5dp"
             android:id="@+id/prevue_play"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
