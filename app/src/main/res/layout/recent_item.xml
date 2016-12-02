@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:orientation="vertical"
+              android:padding="5dp">
+
+
+    <TextView
+        android:id="@+id/tv_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="12月16日"
+        android:textColor="@android:color/black"
+        android:textSize="12sp"/>
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_recent_icon"
+            android:layout_width="80dp"
+            android:layout_height="110dp"
+            android:background="@drawable/q6"/>
+
+
+        <ImageView
+            android:id="@+id/iv_like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#6f787474"
+            android:padding="5dp"
+            android:src="@drawable/a4_"
+            android:tint="@color/white"/>
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_rencent_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="长城"
+        android:textColor="@android:color/black"
+        android:textSize="13sp"/>
+
+    <TextView
+        android:id="@+id/tv_rencent_wish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:text="182162人想看"
+        android:textSize="10sp"/>
+
+</LinearLayout>

@@ -6,15 +6,17 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
 import android.widget.AbsListView;
 import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.atsgg.mycatmovie.R;
+import com.atsgg.mycatmovie.utils.UIUtils;
 
 /**
- * Created by MrbigW on 2016/11/30.
+ * Created by MrbigW on 2016/12/1.
  * weChat:1024057635
  * GitHub:MrbigW
  * Usage: -.-
@@ -22,7 +24,6 @@ import com.atsgg.mycatmovie.R;
  */
 
 public class MovieListView extends ListView implements AbsListView.OnScrollListener {
-
     View header;    //  顶部布局文件
     int headerHeight;   // 顶部布局文件的高度
     int firstVisibleItem;   //  当前第一个可见的item的位置
@@ -39,6 +40,8 @@ public class MovieListView extends ListView implements AbsListView.OnScrollListe
     final int REFLASHING = 3;//   正在刷新状态
 
     IreflashListener listener;
+    private ImageView mIv_on;
+    private View mSearch;
 
 
     public MovieListView(Context context) {
@@ -66,6 +69,10 @@ public class MovieListView extends ListView implements AbsListView.OnScrollListe
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         header = layoutInflater.inflate(R.layout.header_refresh_layout, null);
 
+        mSearch = layoutInflater.inflate(R.layout.header_search_layout, null);
+
+        mIv_on = (ImageView) header.findViewById(R.id.iv_on);
+
         //  测量header的宽和高
         measureView(header);
 
@@ -73,6 +80,7 @@ public class MovieListView extends ListView implements AbsListView.OnScrollListe
         headerHeight = header.getMeasuredHeight();
         topPadding(-headerHeight);
         this.addHeaderView(header);
+        this.addHeaderView(mSearch);
         this.setOnScrollListener(this);
     }
 
@@ -92,9 +100,9 @@ public class MovieListView extends ListView implements AbsListView.OnScrollListe
         int height;
         int tempHeight = params.height;
         if (tempHeight > 0) {
-            height = View.MeasureSpec.makeMeasureSpec(tempHeight, View.MeasureSpec.EXACTLY);
+            height = MeasureSpec.makeMeasureSpec(tempHeight, MeasureSpec.EXACTLY);
         } else {
-            height = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+            height = MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED);
         }
         view.measure(width, height);
     }
@@ -109,6 +117,7 @@ public class MovieListView extends ListView implements AbsListView.OnScrollListe
         // 重绘
         header.invalidate();
     }
+
 
     @Override
     public void onScrollStateChanged(AbsListView view, int scrollState) {
@@ -137,7 +146,7 @@ public class MovieListView extends ListView implements AbsListView.OnScrollListe
                     state = REFLASHING;
                     //  加载最新数据
                     reflashViewByState();
-                    if(listener != null) {
+                    if (listener != null) {
                         listener.onReflash();
                     }
                 } else if (state == PULL) {
@@ -149,6 +158,7 @@ public class MovieListView extends ListView implements AbsListView.OnScrollListe
         }
         return super.onTouchEvent(ev);
     }
+
 
     /**
      * 判断移动过程操作
@@ -173,19 +183,26 @@ public class MovieListView extends ListView implements AbsListView.OnScrollListe
                 }
                 break;
             case PULL:
-                if (space > headerHeight) {
-                    topPadding(50);
+                if (space >= headerHeight) {
+                    topPadding(0);
                 } else {
                     topPadding(topPadding);
+                    if (space > 70) {
+                        mIv_on.setTranslationY(-(space - 70));
+                    }
                 }
-                if (space > headerHeight + 30 && scrollState == SCROLL_STATE_TOUCH_SCROLL) {
+                if (space > headerHeight - 100 && scrollState == SCROLL_STATE_TOUCH_SCROLL) {
                     state = RELESE;
                     reflashViewByState();
                 }
                 break;
             case RELESE:
-                topPadding(50);
-                if (space < headerHeight + 30) {
+                topPadding(topPadding);
+                if (space >= headerHeight) {
+                    topPadding(0);
+                }
+                if (space < headerHeight - 100) {
+                    mIv_on.setTranslationY(0);
                     state = PULL;
                     reflashViewByState();
                 } else if (space <= 0) {
@@ -205,39 +222,27 @@ public class MovieListView extends ListView implements AbsListView.OnScrollListe
     private void reflashViewByState() {
         ImageView iv_refresh = (ImageView) header.findViewById(R.id.iv_refresh);
 
-        //  动画
-        RotateAnimation up = new RotateAnimation(0, 180, RotateAnimation.RELATIVE_TO_SELF, 0.5f, RotateAnimation.RELATIVE_TO_SELF, 0.5f);
-        up.setDuration(500);
-        up.setFillAfter(true);
-        RotateAnimation down = new RotateAnimation(180, 0, RotateAnimation.RELATIVE_TO_SELF, 0.5f, RotateAnimation.RELATIVE_TO_SELF, 0.5f);
-        down.setDuration(500);
+        //  箭头的动画
         RotateAnimation rotate = new RotateAnimation(0, 360, RotateAnimation.RELATIVE_TO_SELF, 0.5f, RotateAnimation.RELATIVE_TO_SELF, 0.5f);
-        rotate.setRepeatCount(99999);
-        down.setDuration(500);
-
-        down.setFillAfter(true);
+        rotate.setRepeatCount(999);
+        rotate.setDuration(900);
+        rotate.setInterpolator(new LinearInterpolator());
         switch (state) {
             case NONE:
                 topPadding(-headerHeight);
-//                arrow.clearAnimation();
+                iv_refresh.clearAnimation();
+                mIv_on.setTranslationY(0);
                 break;
             case PULL:
-//                arrow.setVisibility(VISIBLE);
-//                progress.setVisibility(GONE);
-//                tip.setText("下拉可以刷新~~");
-//                arrow.clearAnimation();
+                iv_refresh.clearAnimation();
                 break;
             case RELESE:
-//                arrow.setVisibility(VISIBLE);
-//                progress.setVisibility(GONE);
-//                tip.setText("松开可以刷新~~");
-//                arrow.clearAnimation();
-//                arrow.setAnimation(up);
+                iv_refresh.clearAnimation();
                 break;
             case REFLASHING:
-                topPadding(50);
+                iv_refresh.clearAnimation();
+                topPadding(-UIUtils.dp2px(70));
                 iv_refresh.setAnimation(rotate);
-//                arrow.clearAnimation();
                 break;
         }
     }
@@ -248,10 +253,12 @@ public class MovieListView extends ListView implements AbsListView.OnScrollListe
     public void reflashComplete() {
         state = NONE;
         isRemark = false;
+        mIv_on.setTranslationY(0);
         reflashViewByState();
+
     }
 
-    public void setInterface(IreflashListener listener) {
+    public void setRefreshInterface(IreflashListener listener) {
         this.listener = listener;
     }
 
@@ -261,6 +268,5 @@ public class MovieListView extends ListView implements AbsListView.OnScrollListe
     public interface IreflashListener {
         void onReflash();
     }
-
 
 }

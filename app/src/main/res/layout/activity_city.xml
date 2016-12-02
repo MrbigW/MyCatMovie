@@ -1,18 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_city"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.atsgg.mycatmovie.activity.CityActivity">
 
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/top_bg"
+        android:gravity="center_vertical">
+
+
+        <ImageView
+            android:id="@+id/iv_city_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/wg"
+            android:tint="@android:color/white"/>
+
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="30dp"
+            android:layout_margin="10dp"
+            android:background="@android:color/black"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="选择城市"
+            android:textColor="@android:color/white"
+            android:textSize="23sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginLeft="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
         android:gravity="center"
-        android:text="定位城市"/>
+        android:orientation="horizontal">
+
+        <EditText
+            android:textCursorDrawable="@drawable/et_cursor_dra"
+            android:background="@null"
+            android:layout_marginLeft="5dp"
+            android:drawablePadding="5dp"
+            android:drawableLeft="@drawable/xg"
+            android:id="@+id/et_city"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="输入城市中文名或拼音"/>
+
+    </LinearLayout>
 
 
-</RelativeLayout>
+    <FrameLayout
+        android:id="@+id/fl_city"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>

@@ -3,7 +3,6 @@ package com.atsgg.mycatmovie.fragment.movie;
 import android.content.Context;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
@@ -12,6 +11,7 @@ import com.atsgg.mycatmovie.adapter.movie.HotMovieAdapter;
 import com.atsgg.mycatmovie.bean.MovieHotBean;
 import com.atsgg.mycatmovie.bean.MovieHotTop;
 import com.atsgg.mycatmovie.common.BaseFragment;
+import com.atsgg.mycatmovie.ui.MovieListView;
 import com.atsgg.mycatmovie.utils.Constants;
 import com.atsgg.mycatmovie.utils.DownLoaderUtils;
 import com.atsgg.mycatmovie.utils.ToastUtil;
@@ -48,7 +48,7 @@ import static com.atsgg.mycatmovie.common.CatMovieApplication.mContext;
 public class HotMovie extends BaseFragment {
 
     @BindView(R.id.lv_movie_hotmovie)
-    ListView lvMovieHotmovie;
+    MovieListView lvMovieHotmovie;
 
     private MovieHotBean mMovieHotBean;
 
@@ -88,8 +88,18 @@ public class HotMovie extends BaseFragment {
         findViews();
         setDataToViews();
         lvMovieHotmovie.addHeaderView(mHot_header);
-        lvMovieHotmovie.setAdapter(new HotMovieAdapter(getActivity(), mMovieHotBean.getData().getMovies()));
-
+        lvMovieHotmovie.setAdapter(new HotMovieAdapter(getActivity(), mMovieHotBean.getData().getMovies().subList(1, mMovieHotBean.getData().getMovies().size())));
+        lvMovieHotmovie.setRefreshInterface(new MovieListView.IreflashListener() {
+            @Override
+            public void onReflash() {
+                UIUtils.getHandler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        lvMovieHotmovie.reflashComplete();
+                    }
+                }, 2000);
+            }
+        });
     }
 
 

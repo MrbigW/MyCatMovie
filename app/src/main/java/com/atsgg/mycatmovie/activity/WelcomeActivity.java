@@ -65,7 +65,6 @@ public class WelcomeActivity extends BaseActivity {
                                 public void run() {
                                     Glide.with(WelcomeActivity.this)
                                             .load(mWelBean.getPosters().get(0).getPic())
-                                            .placeholder(R.drawable.ru)
                                             .fitCenter()
                                             .into(ivWel);
                                 }

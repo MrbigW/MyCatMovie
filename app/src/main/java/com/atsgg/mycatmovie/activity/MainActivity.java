@@ -176,6 +176,7 @@ public class MainActivity extends BaseActivity {
     }
 
 
+
     private boolean isFlag = true;
     private Handler mHandler;
 

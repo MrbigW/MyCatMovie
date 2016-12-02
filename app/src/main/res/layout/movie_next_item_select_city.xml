@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:paddingRight="5dp"
+              android:paddingLeft="5dp"
+              android:paddingBottom="5dp">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/iv_next_icon"
+                    android:layout_width="80dp"
+                    android:layout_height="110dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:background="@drawable/q6"/>
+
+                <ImageView
+                    android:id="@+id/iv_next_play"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/a5b"/>
+
+
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_next_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:text="神奇动物去哪里"
+                        android:textColor="@android:color/black"
+                        android:textSize="20sp"/>
+
+                    <ImageView
+                        android:id="@+id/iv_next_type"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="3dp"
+                        android:src="@drawable/vz"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:gravity="bottom"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_next_audience"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="观众"
+                        android:textSize="17sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_next_audience_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="2dp"
+                        android:text="9.0"
+                        android:textColor="#FFB502"
+                        android:textSize="20sp"/>
+
+                    <View
+                        android:id="@+id/v_next_line"
+                        android:layout_width="1dp"
+                        android:layout_height="15dp"
+                        android:layout_gravity="center"
+                        android:layout_margin="3dp"
+                        android:background="@android:color/darker_gray"/>
+
+                    <TextView
+                        android:id="@+id/tv_next_profession"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="专业"
+                        android:textSize="17sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_next_profession_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="2dp"
+                        android:text="6.9"
+                        android:textColor="#FFB502"
+                        android:textSize="20sp"/>
+
+                    <TextView
+                        android:visibility="gone"
+                        android:id="@+id/tv_next_wish_num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="2dp"
+                        android:text="1000"
+                        android:textColor="#FFB502"
+                        android:textSize="20sp"/>
+
+
+                    <TextView
+                        android:visibility="gone"
+                        android:id="@+id/tv_hot_wish"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="人想看"
+                        android:textSize="17sp"/>
+
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_hot_src"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="神奇动物城"
+                    android:textColor="@color/tv_bg"
+                    android:textSize="16sp"/>
+
+                <TextView
+                    android:singleLine="true"
+                    android:id="@+id/tv_next_actor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="主演"
+                    android:textColor="@color/tv_bg"
+                    android:textSize="16sp"/>
+
+            </LinearLayout>
+
+
+
+            <TextView
+                android:drawablePadding="3dp"
+                android:drawableLeft="@drawable/a4b"
+                android:id="@+id/tv_hot_buy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/tv_buy_bg"
+                android:padding="10dp"
+                android:text="想看"
+                android:textColor="@color/home_back_selected"/>
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+
+
+
+
+</RelativeLayout>

@@ -6,6 +6,7 @@
 
 
     <com.atsgg.mycatmovie.ui.MovieListView
+        android:divider="@null"
         android:id="@+id/lv_movie_hotmovie"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

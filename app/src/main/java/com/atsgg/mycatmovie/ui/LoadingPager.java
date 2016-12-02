@@ -6,6 +6,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -71,10 +72,10 @@ public abstract class LoadingPager extends FrameLayout {
 
             ImageView loding_rotate = (ImageView) view_loading.findViewById(R.id.loding_rotate);
             RotateAnimation animation = new RotateAnimation(0, 360, Animation.RELATIVE_TO_SELF, 0.5F, Animation.RELATIVE_TO_SELF, 0.5F);
-            animation.setDuration(1500);
+            animation.setDuration(1000);
             animation.setRepeatCount(999999);
+            animation.setInterpolator(new LinearInterpolator());
             loding_rotate.setAnimation(animation);
-            animation.start();
 
             addView(view_loading, params);
         }
@@ -146,40 +147,35 @@ public abstract class LoadingPager extends FrameLayout {
             loadPage();
             return;
         }
+        DownLoaderUtils loaderUtils = new DownLoaderUtils();
+        loaderUtils.getJsonResult(url())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<String>() {
+                    @Override
+                    public void onCompleted() {
+                        loadPage();
+                    }
 
-        UIUtils.getHandler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                DownLoaderUtils loaderUtils = new DownLoaderUtils();
-                loaderUtils.getJsonResult(url())
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new Subscriber<String>() {
-                            @Override
-                            public void onCompleted() {
-                                loadPage();
-                            }
+                    @Override
+                    public void onError(Throwable e) {
+                        resultState = ResultState.ERROR;
+                        resultState.setContent(null);
+                        loadPage();
+                    }
 
-                            @Override
-                            public void onError(Throwable e) {
-                                resultState = ResultState.ERROR;
-                                resultState.setContent(null);
-                                loadPage();
-                            }
+                    @Override
+                    public void onNext(String s) {
+                        if (!TextUtils.isEmpty(s)) {
+                            resultState = ResultState.SUCCESS;
+                            resultState.setContent(s);
+                        } else {
+                            resultState = ResultState.EMPTY;
+                            resultState.setContent(null);
+                        }
+                    }
+                });
 
-                            @Override
-                            public void onNext(String s) {
-                                if (!TextUtils.isEmpty(s)) {
-                                    resultState = ResultState.SUCCESS;
-                                    resultState.setContent(s);
-                                } else {
-                                    resultState = ResultState.EMPTY;
-                                    resultState.setContent(null);
-                                }
-                            }
-                        });
-            }
-        }, 2000);
 
     }
 

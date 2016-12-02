@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center">
+
+    <TextView
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:id="@+id/tv_ct_Name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:minWidth="90dp"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        tools:text="上海背景"/>
+
+</LinearLayout>
