@@ -6,7 +6,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.atsgg.mycatmovie.R;
-import com.atsgg.mycatmovie.bean.CityBean;
+import com.atsgg.mycatmovie.bean.city.CityBean;
 import com.atsgg.mycatmovie.common.BaseActivity;
 import com.atsgg.mycatmovie.fragment.CityFragment;
 import com.atsgg.mycatmovie.utils.CacheUtils;

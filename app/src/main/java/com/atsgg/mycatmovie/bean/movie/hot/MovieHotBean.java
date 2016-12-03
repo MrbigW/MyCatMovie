@@ -1,4 +1,4 @@
-package com.atsgg.mycatmovie.bean;
+package com.atsgg.mycatmovie.bean.movie.hot;
 
 import java.io.Serializable;
 import java.util.List;

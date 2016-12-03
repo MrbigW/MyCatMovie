@@ -1,4 +1,4 @@
-package com.atsgg.mycatmovie.bean;
+package com.atsgg.mycatmovie.bean.city;
 
 /**
  * Created by MrbigW on 2016/12/1.

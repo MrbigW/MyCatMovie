@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="120dp"
+              android:layout_height="wrap_content"
+              android:background="#ffff"
+              android:gravity="center"
+              android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/ll_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_awards_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="3dp"
+            android:maxWidth="100dp"
+            android:singleLine="true"
+            android:text="欧洲电影奖"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:src="@drawable/qc"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ll_name"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:background="#eee"/>
+
+        <TextView
+            android:id="@+id/tv_awards_data"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:layout_weight="1"
+            android:text="12-10"/>
+
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:background="#eee"/>
+
+
+    </LinearLayout>
+
+<RelativeLayout
+    android:layout_marginTop="10dp"
+    android:layout_width="100dp"
+    android:layout_height="160dp">
+
+    <ImageView
+        android:layout_centerInParent="true"
+        android:id="@+id/iv_awards_icon"
+        android:layout_width="110dp"
+        android:layout_height="160dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/q6"/>
+
+    <TextView
+        android:textSize="13sp"
+        android:id="@+id/tv_awards_prize"
+        android:padding="2dp"
+        android:textColor="@color/white"
+        android:layout_alignParentRight="true"
+        android:text="最佳影片"
+        android:background="@drawable/tv_awards_bg"
+        android:singleLine="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</RelativeLayout>
+
+
+
+
+    <TextView
+        android:id="@+id/tv_awards_movie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="她"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"/>
+
+</LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

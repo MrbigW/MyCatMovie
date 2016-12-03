@@ -8,7 +8,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.atsgg.mycatmovie.R;
-import com.atsgg.mycatmovie.bean.MovieHotBean;
+import com.atsgg.mycatmovie.bean.movie.hot.MovieHHotBean;
+import com.atsgg.mycatmovie.utils.Constants;
 import com.atsgg.mycatmovie.utils.UIUtils;
 import com.bumptech.glide.Glide;
 
@@ -28,21 +29,21 @@ import butterknife.ButterKnife;
 public class HotMovieAdapter extends BaseAdapter {
 
     private Context mContext;
-    private List<MovieHotBean.DataBean.MoviesBean> mMoviesBean;
+    private List<MovieHHotBean.DataBean.HotBean> mHotBeen;
 
-    public HotMovieAdapter(Context context, List<MovieHotBean.DataBean.MoviesBean> movies) {
+    public HotMovieAdapter(Context context, List<MovieHHotBean.DataBean.HotBean> movies) {
         this.mContext = context;
-        this.mMoviesBean = movies;
+        this.mHotBeen = movies;
     }
 
     @Override
     public int getCount() {
-        return mMoviesBean == null ? 0 : mMoviesBean.size();
+        return mHotBeen == null ? 0 : mHotBeen.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return mMoviesBean.get(position);
+        return mHotBeen.get(position);
     }
 
     @Override
@@ -63,15 +64,37 @@ public class HotMovieAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        MovieHotBean.DataBean.MoviesBean moviesBean = mMoviesBean.get(position);
+        MovieHHotBean.DataBean.HotBean moviesBean = mHotBeen.get(position);
 
         viewHolder.tvHotName.setText(moviesBean.getNm() + "");
         viewHolder.tvHotAudienceNum.setText(moviesBean.getSc() + "");
+        viewHolder.tvHotProfessionNum.setText(moviesBean.getProScore() + "");
         viewHolder.tvHotSrc.setText(moviesBean.getScm() + "");
         viewHolder.tvHotShowinfo.setText(moviesBean.getShowInfo() + "");
-        viewHolder.ivHotType.setTag(position);
+        viewHolder.ivHotType.setTag(moviesBean.getId());
 
-        if (moviesBean.getSc() == 0) {
+        if (moviesBean.getSc() != 0 && moviesBean.getProScore() == 0) {
+            viewHolder.tvHotAudienceNum.setVisibility(View.VISIBLE);
+            viewHolder.tvHotAudience.setVisibility(View.VISIBLE);
+            viewHolder.tvHotProfession.setVisibility(View.GONE);
+            viewHolder.tvHotProfessionNum.setVisibility(View.GONE);
+            viewHolder.vHotLine.setVisibility(View.GONE);
+            viewHolder.tvHotWish.setVisibility(View.GONE);
+            viewHolder.tvHotWishNum.setVisibility(View.GONE);
+        }
+        if (moviesBean.getSc() == 0 && moviesBean.getProScore() != 0) {
+            viewHolder.tvHotAudienceNum.setVisibility(View.GONE);
+            viewHolder.tvHotAudience.setVisibility(View.GONE);
+            viewHolder.tvHotProfession.setVisibility(View.VISIBLE);
+            viewHolder.tvHotProfessionNum.setVisibility(View.VISIBLE);
+            viewHolder.vHotLine.setVisibility(View.GONE);
+            viewHolder.tvHotWish.setVisibility(View.GONE);
+            viewHolder.tvHotWishNum.setVisibility(View.GONE);
+        }
+
+        if (moviesBean.getSc() == 0 && moviesBean.getProScore() == 0) {
+            viewHolder.tvHotProfession.setVisibility(View.GONE);
+            viewHolder.tvHotProfessionNum.setVisibility(View.GONE);
             viewHolder.tvHotAudienceNum.setVisibility(View.GONE);
             viewHolder.tvHotAudience.setVisibility(View.GONE);
             viewHolder.vHotLine.setVisibility(View.GONE);
@@ -80,30 +103,9 @@ public class HotMovieAdapter extends BaseAdapter {
             viewHolder.tvHotWishNum.setText(moviesBean.getWish() + "");
         }
 
-        if (moviesBean.is3d()) {
-            viewHolder.ivHotType.setVisibility(View.VISIBLE);
-            if (moviesBean.isImax()) {
-                if (viewHolder.ivHotType.getTag() != position + "") {
-                    viewHolder.ivHotType.setImageResource(R.drawable.w1);
-                }
-            } else {
-                if (viewHolder.ivHotType.getTag() != position + "") {
-                    viewHolder.ivHotType.setImageResource(R.drawable.w0);
-                }
-            }
-        } else {
-            viewHolder.ivHotType.setVisibility(View.VISIBLE);
-            if (moviesBean.isImax()) {
-                if (viewHolder.ivHotType.getTag() != position + "") {
-                    viewHolder.ivHotType.setImageResource(R.drawable.vz);
-                }
-            } else {
-                viewHolder.ivHotType.setVisibility(View.GONE);
-            }
-        }
 
         Glide.with(mContext)
-                .load(moviesBean.getImg())
+                .load(moviesBean.getImg().replaceAll(Constants.ERROR_URL_2, Constants.RIGHT_URL).replaceAll(Constants.ERROR_URL, Constants.RIGHT_URL))
                 .into(viewHolder.ivHotIcon);
 
         viewHolder.tvHotAudienceNum.setText(moviesBean.getSc() + "");
@@ -120,9 +122,32 @@ public class HotMovieAdapter extends BaseAdapter {
                 viewHolder.tvHotBuy.setTextColor(UIUtils.getColor(R.color.home_back_selected));
         }
 
-        viewHolder.tvHotProfession.setVisibility(View.GONE);
-        viewHolder.tvHotProfessionNum.setVisibility(View.GONE);
-        viewHolder.vHotLine.setVisibility(View.GONE);
+
+        if (moviesBean.getVer().contains("3D")) {
+            if (moviesBean.getVer().replaceAll("3D", "").contains("IMAX")) {
+                if (viewHolder.ivHotType.getTag().toString().equals(moviesBean.getId() + "")) {
+                    viewHolder.ivHotType.setImageResource(R.drawable.w1);
+                }
+            } else {
+                if (viewHolder.ivHotType.getTag().toString().equals(moviesBean.getId() + "")) {
+                    viewHolder.ivHotType.setImageResource(R.drawable.w0);
+                }
+            }
+        }else if(moviesBean.getVer().contains("2D")) {
+            if (moviesBean.getVer().replaceAll("2d", "").contains("IMAX")) {
+                if (viewHolder.ivHotType.getTag().toString().equals(moviesBean.getId() + "")) {
+                    viewHolder.ivHotType.setImageResource(R.drawable.vz);
+                }
+            } else {
+                if (viewHolder.ivHotType.getTag().toString().equals(moviesBean.getId() + "")) {
+                    viewHolder.ivHotType.setVisibility(View.GONE);
+                }
+            }
+        }else {
+            if (viewHolder.ivHotType.getTag().toString().equals(moviesBean.getId() + "")) {
+                viewHolder.ivHotType.setVisibility(View.GONE);
+            }
+        }
 
         return convertView;
 

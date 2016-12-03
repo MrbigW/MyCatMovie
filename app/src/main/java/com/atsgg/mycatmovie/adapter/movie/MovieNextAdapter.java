@@ -9,7 +9,7 @@ import android.widget.TextView;
 import com.atsgg.mycatmovie.R;
 import com.atsgg.mycatmovie.adapter.common.CommonAdapter;
 import com.atsgg.mycatmovie.adapter.common.ViewHolder;
-import com.atsgg.mycatmovie.bean.MovieNextBean;
+import com.atsgg.mycatmovie.bean.movie.next.MovieNextBean;
 import com.atsgg.mycatmovie.utils.Constants;
 import com.bumptech.glide.Glide;
 
@@ -77,21 +77,30 @@ public class MovieNextAdapter extends CommonAdapter<MovieNextBean.DataBean.Comin
         }
 
 
-        nextHolder.iv_next_type.setVisibility(View.VISIBLE);
-        if (comingBean.getVer().contentEquals("2D/IMAX 2D/中国巨幕")) {
-            if (!nextHolder.iv_next_type.getTag().toString().equals(comingBean.getId() + "")) {
-                nextHolder.iv_next_type.setImageResource(R.drawable.vz);
+        if (comingBean.getVer().contains("3D")) {
+            if (comingBean.getVer().replaceAll("3D", "").contains("IMAX")) {
+                if (nextHolder.iv_next_type.getTag().toString().equals(comingBean.getId() + "")) {
+                    nextHolder.iv_next_type.setImageResource(R.drawable.w1);
+                }
+            } else {
+                if (nextHolder.iv_next_type.getTag().toString().equals(comingBean.getId() + "")) {
+                    nextHolder.iv_next_type.setImageResource(R.drawable.w0);
+                }
             }
-        } else if (comingBean.getVer().contentEquals("3D")) {
-            if (!nextHolder.iv_next_type.getTag().toString().equals(comingBean.getId() + "")) {
-                nextHolder.iv_next_type.setImageResource(R.drawable.w0);
+        }else if(comingBean.getVer().contains("2D")) {
+            if (comingBean.getVer().replaceAll("2d", "").contains("IMAX")) {
+                if (nextHolder.iv_next_type.getTag().toString().equals(comingBean.getId() + "")) {
+                    nextHolder.iv_next_type.setImageResource(R.drawable.vz);
+                }
+            } else {
+                if (nextHolder.iv_next_type.getTag().toString().equals(comingBean.getId() + "")) {
+                    nextHolder.iv_next_type.setVisibility(View.GONE);
+                }
             }
-        } else if (comingBean.getVer().contentEquals("3D/IMAX 3D/中国巨幕")) {
-            if (!nextHolder.iv_next_type.getTag().toString().equals(comingBean.getId() + "")) {
-                nextHolder.iv_next_type.setImageResource(R.drawable.w1);
+        }else {
+            if (nextHolder.iv_next_type.getTag().toString().equals(comingBean.getId() + "")) {
+                nextHolder.iv_next_type.setVisibility(View.GONE);
             }
-        } else {
-            nextHolder.iv_next_type.setVisibility(View.GONE);
         }
 
 

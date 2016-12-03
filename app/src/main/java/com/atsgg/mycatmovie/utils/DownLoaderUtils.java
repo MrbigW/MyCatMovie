@@ -49,8 +49,6 @@ public class DownLoaderUtils {
                                 subscriber.onNext(response.body().string());
                             }
 
-                            // 结束
-                            mClient = null;
                             subscriber.onCompleted();
                         }
                     });

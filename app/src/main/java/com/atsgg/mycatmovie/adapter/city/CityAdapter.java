@@ -9,7 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.atsgg.mycatmovie.R;
-import com.atsgg.mycatmovie.bean.CityBean;
+import com.atsgg.mycatmovie.bean.city.CityBean;
 
 import java.util.List;
 

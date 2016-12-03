@@ -8,8 +8,8 @@ import android.widget.TextView;
 import com.alibaba.fastjson.JSON;
 import com.atsgg.mycatmovie.R;
 import com.atsgg.mycatmovie.adapter.movie.HotMovieAdapter;
-import com.atsgg.mycatmovie.bean.MovieHotBean;
-import com.atsgg.mycatmovie.bean.MovieHotTop;
+import com.atsgg.mycatmovie.bean.movie.hot.MovieHHotBean;
+import com.atsgg.mycatmovie.bean.movie.hot.MovieHotTop;
 import com.atsgg.mycatmovie.common.BaseFragment;
 import com.atsgg.mycatmovie.ui.MovieListView;
 import com.atsgg.mycatmovie.utils.Constants;
@@ -23,10 +23,6 @@ import com.youth.banner.Transformer;
 import com.youth.banner.listener.OnBannerClickListener;
 import com.youth.banner.loader.ImageLoader;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,8 +30,6 @@ import butterknife.BindView;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
-
-import static com.atsgg.mycatmovie.common.CatMovieApplication.mContext;
 
 /**
  * Created by MrbigW on 2016/11/30.
@@ -50,9 +44,11 @@ public class HotMovie extends BaseFragment {
     @BindView(R.id.lv_movie_hotmovie)
     MovieListView lvMovieHotmovie;
 
-    private MovieHotBean mMovieHotBean;
+//    private MovieHotBean mMovieHotBean;
 
-    private MovieHotBean.DataBean.MoviesBean moviesBean;
+//    private MovieHotBean.DataBean.MoviesBean moviesBean;
+
+    private List<MovieHHotBean.DataBean.HotBean> mHotBean;
 
     private MovieHotTop mHotTop;
 
@@ -78,7 +74,7 @@ public class HotMovie extends BaseFragment {
 
     @Override
     protected String getUrl() {
-        return Constants.URL_MOVIE_HOT;
+        return Constants.URL_MOVIE_HHOT;
     }
 
     @Override
@@ -88,7 +84,7 @@ public class HotMovie extends BaseFragment {
         findViews();
         setDataToViews();
         lvMovieHotmovie.addHeaderView(mHot_header);
-        lvMovieHotmovie.setAdapter(new HotMovieAdapter(getActivity(), mMovieHotBean.getData().getMovies().subList(1, mMovieHotBean.getData().getMovies().size())));
+        lvMovieHotmovie.setAdapter(new HotMovieAdapter(getActivity(), mHotBean.subList(1, mHotBean.size())));
         lvMovieHotmovie.setRefreshInterface(new MovieListView.IreflashListener() {
             @Override
             public void onReflash() {
@@ -115,18 +111,7 @@ public class HotMovie extends BaseFragment {
 
     private void processData(String content) {
 
-        mMovieHotBean = JSON.parseObject(content, MovieHotBean.class);
-        try {
-            JSONObject object = new JSONObject(content);
-            JSONObject data = object.getJSONObject("data");
-            JSONArray movies = data.getJSONArray("movies");
-            for (int i = 0; i < movies.length(); i++) {
-                mMovieHotBean.getData().getMovies().get(i).setIs3d(movies.getJSONObject(i).getBoolean("3d"));
-            }
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        mHotBean = JSON.parseObject(content, MovieHHotBean.class).getData().getHot();
 
     }
 
@@ -156,45 +141,80 @@ public class HotMovie extends BaseFragment {
     }
 
     private void setHead() {
-        moviesBean = mMovieHotBean.getData().getMovies().get(0);
-        tvHotName.setText(moviesBean.getNm() + "");
-        tvHotAudienceNum.setText(moviesBean.getSc() + "");
-        tvHotSrc.setText(moviesBean.getScm() + "");
-        tvHotShowinfo.setText(moviesBean.getShowInfo() + "");
 
-        if (moviesBean.getSc() == 0) {
+        tvHotName.setText(mHotBean.get(0).getNm() + "");
+        tvHotAudienceNum.setText(mHotBean.get(0).getSc() + "");
+        tvHotProfessionNum.setText(mHotBean.get(0).getProScore() + "");
+        tvHotSrc.setText(mHotBean.get(0).getScm() + "");
+        tvHotShowinfo.setText(mHotBean.get(0).getShowInfo() + "");
+        tvHotZhuanti1.setText(mHotBean.get(0).getNewsHeadlines().get(0).getTitle());
+        tvHotZhuanti2.setText(mHotBean.get(0).getNewsHeadlines().get(1).getTitle());
+        ivHotType.setTag(mHotBean.get(0).getId());
+
+
+        if (mHotBean.get(0).getSc() != 0 && mHotBean.get(0).getProScore() == 0) {
+            tvHotAudienceNum.setVisibility(View.VISIBLE);
+            tvHotAudience.setVisibility(View.VISIBLE);
+            tvHotProfession.setVisibility(View.GONE);
+            tvHotProfessionNum.setVisibility(View.GONE);
+            vHotLine.setVisibility(View.GONE);
+            tvHotWish.setVisibility(View.GONE);
+            tvHotWishNum.setVisibility(View.GONE);
+        }
+        if (mHotBean.get(0).getSc() == 0 && mHotBean.get(0).getProScore() != 0) {
+            tvHotAudienceNum.setVisibility(View.GONE);
+            tvHotAudience.setVisibility(View.GONE);
+            tvHotProfession.setVisibility(View.VISIBLE);
+            tvHotProfessionNum.setVisibility(View.VISIBLE);
+            vHotLine.setVisibility(View.GONE);
+            tvHotWish.setVisibility(View.GONE);
+            tvHotWishNum.setVisibility(View.GONE);
+        }
+
+        if (mHotBean.get(0).getSc() == 0 && mHotBean.get(0).getProScore() == 0) {
+            tvHotProfession.setVisibility(View.GONE);
+            tvHotProfessionNum.setVisibility(View.GONE);
             tvHotAudienceNum.setVisibility(View.GONE);
             tvHotAudience.setVisibility(View.GONE);
             vHotLine.setVisibility(View.GONE);
             tvHotWish.setVisibility(View.VISIBLE);
             tvHotWishNum.setVisibility(View.VISIBLE);
-            tvHotWishNum.setText(moviesBean.getWish() + "");
+            tvHotWishNum.setText(mHotBean.get(0).getWish() + "");
         }
 
-        if (moviesBean.is3d()) {
-            ivHotType.setVisibility(View.VISIBLE);
-            if (moviesBean.isImax()) {
-                ivHotType.setImageResource(R.drawable.w1);
+        if (mHotBean.get(0).getVer().contains("3D")) {
+            if (mHotBean.get(0).getVer().replaceAll("3D", "").contains("IMAX")) {
+                if (ivHotType.getTag().toString().equals(mHotBean.get(0).getId() + "")) {
+                    ivHotType.setImageResource(R.drawable.w1);
+                }
             } else {
-                ivHotType.setImageResource(R.drawable.w0);
-
+                if (ivHotType.getTag().toString().equals(mHotBean.get(0).getId() + "")) {
+                    ivHotType.setImageResource(R.drawable.w0);
+                }
+            }
+        } else if (mHotBean.get(0).getVer().contains("2D")) {
+            if (mHotBean.get(0).getVer().replaceAll("2d", "").contains("IMAX")) {
+                if (ivHotType.getTag().toString().equals(mHotBean.get(0).getId() + "")) {
+                    ivHotType.setImageResource(R.drawable.vz);
+                }
+            } else {
+                if (ivHotType.getTag().toString().equals(mHotBean.get(0).getId() + "")) {
+                    ivHotType.setVisibility(View.GONE);
+                }
             }
         } else {
-            ivHotType.setVisibility(View.VISIBLE);
-            if (moviesBean.isImax()) {
-                ivHotType.setImageResource(R.drawable.vz);
-            } else {
+            if (ivHotType.getTag().toString().equals(mHotBean.get(0).getId() + "")) {
                 ivHotType.setVisibility(View.GONE);
             }
         }
 
-        Glide.with(mContext)
-                .load(moviesBean.getImg())
+
+        Glide.with(getActivity())
+                .load(mHotBean.get(0).getImg().replaceAll(Constants.ERROR_URL_2, Constants.RIGHT_URL).replaceAll(Constants.ERROR_URL, Constants.RIGHT_URL))
                 .into(ivHotIcon);
 
-        tvHotAudienceNum.setText(moviesBean.getSc() + "");
 
-        int preSale = moviesBean.getPreSale();
+        int preSale = mHotBean.get(0).getPreSale();
         switch (preSale) {
             case 1:
                 tvHotBuy.setBackgroundResource(R.drawable.tv_presale_bg);
@@ -206,9 +226,6 @@ public class HotMovie extends BaseFragment {
                 tvHotBuy.setTextColor(UIUtils.getColor(R.color.home_back_selected));
         }
 
-        tvHotProfession.setVisibility(View.GONE);
-        tvHotProfessionNum.setVisibility(View.GONE);
-        vHotLine.setVisibility(View.GONE);
     }
 
     private void setBanner() {

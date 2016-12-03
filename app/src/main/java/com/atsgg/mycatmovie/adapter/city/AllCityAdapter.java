@@ -5,7 +5,7 @@ import android.content.Context;
 import com.atsgg.mycatmovie.R;
 import com.atsgg.mycatmovie.adapter.common.CommonAdapter;
 import com.atsgg.mycatmovie.adapter.common.ViewHolder;
-import com.atsgg.mycatmovie.bean.CityBean;
+import com.atsgg.mycatmovie.bean.city.CityBean;
 
 import java.util.List;
 

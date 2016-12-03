@@ -9,12 +9,12 @@ import com.atsgg.mycatmovie.R;
 import com.atsgg.mycatmovie.adapter.common.HeaderRecyclerAndFooterWrapperAdapter;
 import com.atsgg.mycatmovie.adapter.common.ViewHolder;
 import com.atsgg.mycatmovie.adapter.movie.MovieNextAdapter;
-import com.atsgg.mycatmovie.adapter.movie.PrevueAdapter;
-import com.atsgg.mycatmovie.adapter.movie.RecentAdapter;
-import com.atsgg.mycatmovie.bean.MovieNextBean;
-import com.atsgg.mycatmovie.bean.NextMovieHeaderBean;
-import com.atsgg.mycatmovie.bean.PrevueBean;
-import com.atsgg.mycatmovie.bean.RecentBean;
+import com.atsgg.mycatmovie.adapter.movie.PrevueAdapter1;
+import com.atsgg.mycatmovie.adapter.movie.RecentAdapter1;
+import com.atsgg.mycatmovie.bean.movie.next.MovieNextBean;
+import com.atsgg.mycatmovie.bean.movie.next.NextMovieHeaderBean;
+import com.atsgg.mycatmovie.bean.movie.next.PrevueBean;
+import com.atsgg.mycatmovie.bean.movie.next.RecentBean;
 import com.atsgg.mycatmovie.common.BaseFragment;
 import com.atsgg.mycatmovie.utils.Constants;
 import com.atsgg.mycatmovie.utils.DownLoaderUtils;
@@ -75,7 +75,7 @@ public class NextMovie extends BaseFragment {
                 .subscribe(new Subscriber<String>() {
                     @Override
                     public void onCompleted() {
-                        getRecentBean();
+
                     }
 
                     @Override
@@ -99,8 +99,7 @@ public class NextMovie extends BaseFragment {
                 .subscribe(new Subscriber<String>() {
                     @Override
                     public void onCompleted() {
-                        initViews();
-                        setDatas();
+
                     }
 
                     @Override
@@ -118,10 +117,13 @@ public class NextMovie extends BaseFragment {
 
     private void processRecent(String s) {
         mRecentBeen = JSON.parseObject(s, RecentBean.class).getData().getMovies();
+        initViews();
+        setDatas();
     }
 
     private void processPrevue(String s) {
         mPrevueBeen = JSON.parseObject(s, PrevueBean.class).getData();
+        getRecentBean();
     }
 
 
@@ -144,13 +146,13 @@ public class NextMovie extends BaseFragment {
                     case R.layout.prevue_item_header_item:
                         //横向recyclerview
                         RecyclerView recyclerView = holder.getView(R.id.rv_prevue);
-                        recyclerView.setAdapter(new PrevueAdapter(getActivity(), R.layout.prevue_item, mPrevueBeen));
+                        recyclerView.setAdapter(new PrevueAdapter1(getActivity(), R.layout.prevue_item, mPrevueBeen));
                         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
                         break;
                     case R.layout.recent_item_header_item:
                         //横向recyclerview
                         RecyclerView recyclerView1 = holder.getView(R.id.rv_recent);
-                        recyclerView1.setAdapter(new RecentAdapter(getActivity(), R.layout.recent_item, mRecentBeen));
+                        recyclerView1.setAdapter(new RecentAdapter1(getActivity(), R.layout.recent_item, mRecentBeen));
                         recyclerView1.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
                         break;
                     case R.layout.header_search_layout:

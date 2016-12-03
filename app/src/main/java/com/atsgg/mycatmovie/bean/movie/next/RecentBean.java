@@ -1,4 +1,4 @@
-package com.atsgg.mycatmovie.bean;
+package com.atsgg.mycatmovie.bean.movie.next;
 
 import com.mcxtzhang.indexlib.suspension.ISuspensionInterface;
 

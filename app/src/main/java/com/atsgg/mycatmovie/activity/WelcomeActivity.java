@@ -32,6 +32,7 @@ public class WelcomeActivity extends BaseActivity {
     @Override
     protected void initData() {
         getDataFromNet();
+
     }
 
 

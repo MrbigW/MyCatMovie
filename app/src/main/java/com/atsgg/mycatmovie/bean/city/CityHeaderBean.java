@@ -1,4 +1,4 @@
-package com.atsgg.mycatmovie.bean;
+package com.atsgg.mycatmovie.bean.city;
 
 import com.mcxtzhang.indexlib.IndexBar.bean.BaseIndexPinyinBean;
 
