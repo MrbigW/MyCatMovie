@@ -69,6 +69,9 @@ public class NextMovie extends BaseFragment {
     protected void initData(String content) {
         processComing(content);
 
+    }
+
+    private void getPrevueBean() {
         new DownLoaderUtils().getJsonResult(Constants.URL_MOVIE_PREVUE)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -89,7 +92,6 @@ public class NextMovie extends BaseFragment {
 
                     }
                 });
-
     }
 
     private void getRecentBean() {
@@ -183,8 +185,8 @@ public class NextMovie extends BaseFragment {
 
         mAdapter.setDatas(mComing);
         mHeaderAdapter.notifyDataSetChanged();
+        mAdapter.notifyDataSetChanged();
         mSourceDatas.addAll(mComing);
-
         mDecoration.setmDatas(mSourceDatas);
 
     }
@@ -203,6 +205,7 @@ public class NextMovie extends BaseFragment {
 
     private void processComing(String content) {
         mComing = JSON.parseObject(content, MovieNextBean.class).getData().getComing();
+        getPrevueBean();
     }
 
 

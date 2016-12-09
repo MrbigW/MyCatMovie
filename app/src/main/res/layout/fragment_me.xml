@@ -1,13 +1,532 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#FFFFFF">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="我的"/>
+        android:orientation="vertical">
 
-</LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:background="@color/top_bg"
+            android:clickable="true">
+
+            <ImageView
+                android:id="@+id/iv_user_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/backgroud_logo02" />
+
+            <TextView
+                android:id="@+id/tv_login_now"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/iv_user_icon"
+                android:clickable="true"
+                android:text="立即登录"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/triangle01" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:gravity="center_vertical">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="5dp"
+                    android:drawableTop="@drawable/vi"
+                    android:gravity="center"
+                    android:text="想看"
+                    android:textColor="#494949"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="0.1dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:background="#e1d9d9"></View>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="5dp"
+                    android:drawableTop="@drawable/vf"
+                    android:gravity="center"
+                    android:text="看过"
+                    android:textColor="#494949"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="0.1dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:background="#e1d9d9">
+
+            </View>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="5dp"
+                    android:drawableTop="@drawable/va"
+                    android:gravity="center"
+                    android:text="影评"
+                    android:textColor="#494949"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="0.1dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:background="#e1d9d9"></View>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="5dp"
+                    android:drawableTop="@drawable/vh"
+                    android:gravity="center"
+                    android:text="话题"
+                    android:textColor="#494949"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </LinearLayout>
+        <!-- 分割线-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            android:background="#F5F5F5" />
+
+        <RelativeLayout
+            android:id="@+id/rl_my_ordered"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:clickable="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:text="我的订单"
+                android:textColor="#494949" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:drawablePadding="5dp"
+                android:drawableRight="@drawable/triangle"
+                android:text="全部"
+                android:textColor="@android:color/darker_gray" />
+        </RelativeLayout>
+        <!-- 分割线-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="1.2dp"
+            android:background="#F5F5F5" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:gravity="center_vertical">
+
+            <LinearLayout
+                android:id="@+id/ll_no_resume"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="5dp"
+                    android:drawableTop="@drawable/vo"
+                    android:gravity="center"
+                    android:text="未消费"
+                    android:textColor="#494949"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_wait_for_pay"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="5dp"
+                    android:drawableTop="@drawable/vn"
+                    android:gravity="center"
+                    android:text="待付款"
+                    android:textColor="#494949"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_wait_comment"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="5dp"
+                    android:drawableTop="@drawable/vm"
+                    android:gravity="center"
+                    android:text="待评价"
+                    android:textColor="#494949"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_refund"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="5dp"
+                    android:drawableTop="@drawable/vk"
+                    android:gravity="center"
+                    android:text="退款"
+                    android:textColor="#494949"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </LinearLayout>
+        <!-- 分割线-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            android:background="#F5F5F5" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/rl_my_message"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:clickable="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:text="我的消息"
+                    android:textColor="#494949" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/triangle" />
+            </RelativeLayout>
+            <!-- 分割线-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1.2dp"
+                android:background="#F5F5F5" />
+
+            <RelativeLayout
+                android:id="@+id/rl_collection"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:clickable="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:text="我的收藏"
+                    android:textColor="#494949" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/triangle" />
+            </RelativeLayout>
+            <!-- 分割线-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1.2dp"
+                android:background="#F5F5F5" />
+
+            <RelativeLayout
+                android:id="@+id/rl_achievement"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:clickable="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:text="我的成就"
+                    android:textColor="#494949" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/triangle" />
+            </RelativeLayout>
+            <!-- 分割线-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1.2dp"
+                android:background="#F5F5F5" />
+        </LinearLayout>
+        <!-- 分割线-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            android:background="#F5F5F5" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/rl_meituan_wallet"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:clickable="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:text="美团钱包"
+                    android:textColor="#494949" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/triangle" />
+            </RelativeLayout>
+            <!-- 分割线-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1.2dp"
+                android:background="#F5F5F5" />
+
+            <RelativeLayout
+                android:id="@+id/rl_my_balance"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:clickable="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:text="我的余额"
+                    android:textColor="#494949" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="5dp"
+                    android:layout_toLeftOf="@+id/next"
+                    android:text="0.00元"
+                    android:textColor="@android:color/darker_gray" />
+
+                <ImageView
+                    android:id="@+id/next"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/triangle" />
+            </RelativeLayout>
+            <!-- 分割线-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1.2dp"
+                android:background="#F5F5F5" />
+
+            <RelativeLayout
+                android:id="@+id/rl_my_coupon"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:clickable="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:text="优惠券"
+                    android:textColor="#494949" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/triangle" />
+            </RelativeLayout>
+            <!-- 分割线-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1.2dp"
+                android:background="#F5F5F5" />
+
+            <RelativeLayout
+                android:id="@+id/rl_shopping_mall"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:clickable="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:text="商城"
+                    android:textColor="#494949" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/triangle" />
+            </RelativeLayout>
+            <!-- 分割线-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1.2dp"
+                android:background="#F5F5F5" />
+        </LinearLayout>
+        <!-- 分割线-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            android:background="#F5F5F5" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/rl_settings"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:clickable="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:text="设置"
+                    android:textColor="#494949" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/triangle" />
+            </RelativeLayout>
+        </LinearLayout>
+        <!-- 分割线-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="#F5F5F5" />
+    </LinearLayout>
+</ScrollView>

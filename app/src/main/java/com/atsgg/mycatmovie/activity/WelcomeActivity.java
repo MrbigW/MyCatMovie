@@ -31,7 +31,14 @@ public class WelcomeActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        getDataFromNet();
+//        getDataFromNet();
+            UIUtils.getHandler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    finish();
+                    startActivity(new Intent(WelcomeActivity.this, MainActivity.class));
+                }
+            },2500);
 
     }
 

@@ -7,6 +7,8 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.List;
+
 /**
  * 介绍：一个给RecyclerView添加HeaderView FooterView的装饰Adapter类
  * 重点哦~ RecyclerView的HeaderView将可以被系统回收，不像老版的HeaderView是一个强引用在内存里
@@ -182,6 +184,10 @@ public abstract class HeaderRecyclerAndFooterWrapperAdapter extends RecyclerView
         mInnerAdapter.onBindViewHolder(holder, position - getHeaderViewCount());
     }
 
+    @Override
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position, List<Object> payloads) {
+        super.onBindViewHolder(holder, position, payloads);
+    }
 
     @Override
     public int getItemCount() {

@@ -41,6 +41,11 @@ public class Constants {
     // FindMovie--RecyclerView
     public static final String URL_FIND_RECYCLER = "http://api.maoyan.com/mmdb/movie/winning/film/2016-12-02/list.json?utm_campaign=AmovieBmovieCD-1&movieBundleVersion=7601&utm_source=meituan&utm_medium=android&utm_term=7.6.0&utm_content=000000000000000&ci=1&net=13&dModel=Android%20SDK%20built%20for%20x86_64&uuid=DD912D1B051F987F2712A1A48E82FD578BEA3ADF987122065B356025C2BF818F&refer=/Welcome";
 
+    public static final String FIND_LIST_URL = "http://api.maoyan.com/sns/v5/feed.json?";
+
+    public static final String FIND_HEAD_URL = "http://api.maoyan.com/sns/v2/buttons.json?utm_campaign=AmovieBmovieCD-1&movieBundleVersion=7601&utm_source=meizu&utm_medium=android&utm_term=7.6.0&utm_content=865479028905735&ci=1&net=255&dModel=MX4&uuid=F02F61DCB963FEAF421EF2B0673996706BABCBA6FA9412580E90681C52CB9B11&lat=40.10077&lng=116.378582&__reqTraceID=3549463187063305748&refer=%2FWelcome&__skck=6a375bce8c66a0dc293860dfa83833ef&__skts=1480832640407&__skua=32bcf146c756ecefe7535b95816908e3&__skno=f9b222bf-f57d-4c18-ac19-52c3bd199905&__skcy=rSQm2Bkrgr%2BJHs31LsskUzU0FT8%3D";
+
+
     public static final String ERROR_URL = "http://p1.meituan.net/w.h";
     public static final String ERROR_URL_2 = "http://p0.meituan.net/w.h";
     public static final String RIGHT_URL = "http://p0.meituan.net/165.220";
